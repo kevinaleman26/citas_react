@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
-function QRReader({pacientes,setPacientes}) {
+function QRReader({pacientes,setPacientes,setShowModal}) {
   const [data, setData] = useState('');
 
   return (
@@ -40,8 +40,17 @@ function QRReader({pacientes,setPacientes}) {
               className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
               onClick={() => {
-                setPacientes([...pacientes,data]);
-                console.log("Nuevo Registro")
+
+                if(pacientes.length > 0) {
+                    const pacienteActualizado = pacientes.map(pacienteState => pacienteState.id === data.id 
+                        ? data : pacienteState)
+                    setPacientes(pacienteActualizado);    
+                    console.log("Editando")
+                } else {
+                  setPacientes([...pacientes,data])
+                  console.log("Nuevo Registro")
+                }
+                setShowModal(false)
               }}
           >
               Guardar dato

@@ -197,6 +197,7 @@ const Formulario = ({pacientes,setPacientes,paciente,setPaciente}) => {
                                     <QRReader
                                         pacientes={pacientes}
                                         setPacientes={setPacientes}
+                                        setShowModal={setShowModal}
                                     />
                                 </p>
                                 </div>
